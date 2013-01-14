@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tetris", "Tetris.vcproj", "{3EFC897D-F7B8-4F40-8292-7A1C73432F38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{929AED66-AA0A-4276-9B49-4F9A4C71B679} = {929AED66-AA0A-4276-9B49-4F9A4C71B679}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BEngine", "..\lib\BEngine\projects\win32\BEngine.vcproj", "{929AED66-AA0A-4276-9B49-4F9A4C71B679}"
 EndProject
