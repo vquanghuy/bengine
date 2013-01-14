@@ -1,15 +1,19 @@
 #ifndef _CSINGLETON_H_
 #define _CSINGLETON_H_
 
-template <class T>
-class CSingleton
+namespace BEngine
 {
-	static T			m_sInstance;
+	template <class T>
+	class CSingleton
+	{
+		static T			m_sInstance;
 
-	CSingleton<T>();
+		CSingleton<T>();
 
-public:
-	T GetInstance();	
-};
+	public:
+		T					GetInstance();
+		void				DestroyInstance();
+	};
+}
 
 #endif

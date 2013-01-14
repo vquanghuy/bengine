@@ -1,20 +1,36 @@
 #include "Utils/CSingleton.h"
 
-template <class T>
-CSingleton<T>::CSingleton()
-{
-}
+#include "bengine_header.h"
 
-template <class T>
-T CSingleton<T>::m_sInstance = NULL;
-
-template <class T>
-T CSingleton<T>::GetInstance()
+namespace BEngine
 {
-	if(!m_sInstance)
+	template <class T>
+	CSingleton<T>::CSingleton()
 	{
-		m_sInstance = new CSingleton<T>;
 	}
 
-	return m_sInstance;	
+	template <class T>
+	T CSingleton<T>::m_sInstance = NULL;
+
+	template <class T>
+	T CSingleton<T>::GetInstance()
+	{
+		if(!m_sInstance)
+		{
+			m_sInstance = new CSingleton<T>;
+		}
+
+		return m_sInstance;	
+	}
+
+	template <class T>
+	void CSingleton<T>::DestroyInstance()
+	{
+		if(m_sInstance)
+		{
+			SAFE_DEL(m_sInstance);
+		}
+
+		m_sInstance = NULL;
+	}
 }
