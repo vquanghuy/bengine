@@ -6,6 +6,7 @@ namespace BEngine
 	template <class T>
 	class CSingleton
 	{
+	protected:
 		static T			m_sInstance;
 
 		CSingleton<T>();
