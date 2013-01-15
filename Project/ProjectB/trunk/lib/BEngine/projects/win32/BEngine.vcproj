@@ -190,6 +190,18 @@
 			Name="IO"
 			>
 		</Filter>
+		<Filter
+			Name="Platform"
+			>
+			<File
+				RelativePath="..\..\source\Platform\CPlatformWin32.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Platform\CPlatformWin32.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\include\bengine_header.h"
 			>
