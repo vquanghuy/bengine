@@ -1,5 +1,7 @@
 #include "Platform/CPlatformWin32.h"
 
+#ifdef PLATFORM_WIN32
+
 namespace BEngine
 {
 	CPlatformWin32::CPlatformWin32() :	m_bFullScreen(false),
@@ -57,7 +59,8 @@ namespace BEngine
 
 	LRESULT CALLBACK CPlatformWin32::WndProc(HWND hWnd, UINT uiMsg, WPARAM wParam, LPARAM lParam) 
 	{
-		switch(uiMsg) {
+		switch(uiMsg) 
+		{
 			case WM_CLOSE:
 					exit(1);
 					return 0;
@@ -70,10 +73,10 @@ namespace BEngine
 				
 			}
 			return 0;
-	}
+		}
 
-	return DefWindowProc(hWnd, uiMsg, wParam, lParam);
-}
+		return DefWindowProc(hWnd, uiMsg, wParam, lParam);
+	}
 
 	void CPlatformWin32::DestroyWin32View()
 	{
@@ -126,6 +129,18 @@ namespace BEngine
 			m_bInit = false;
 		}
 	}
+
+	void CPlatformWin32::Update()
+	{
+		if(PeekMessage(&m_sMessage, NULL, 0, 0, PM_REMOVE)) {
+            if(m_sMessage.message == WM_QUIT) {
+                
+            } else {
+                TranslateMessage(&m_sMessage);
+                DispatchMessage(&m_sMessage);
+            }
+        }
+	}
 }
 
-
+#endif

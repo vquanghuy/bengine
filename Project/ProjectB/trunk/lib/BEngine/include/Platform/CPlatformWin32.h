@@ -1,9 +1,10 @@
-#ifndef _CWIN32_VIEW_H_
-#define _CWIN32_VIEW_H_
+#ifndef _CPLATFORM_WIN32_H_
+#define _CPLATFORM_WIN32_H_
+
+#include "bengine_header.h"
 
 #ifdef PLATFORM_WIN32
 
-#include "bengine_header.h"
 #include "Utils/CSingleton.h"
 
 namespace BEngine
@@ -26,6 +27,9 @@ namespace BEngine
 		HWND			m_hWindow;
 		HDC				m_hDisplay;
 
+		//message info
+		MSG				m_sMessage;
+
 		//protected function
 	protected:
 		void						CreateWin32View();
@@ -43,6 +47,8 @@ namespace BEngine
 
 		void			Create(__INT32 iWidth = 800 , __INT32 iHeight = 600, __STRING sTitle = "Game", __BOOL bFullscreen = false);
 		void			Destroy();
+
+		void			Update();
 	};
 }
 
