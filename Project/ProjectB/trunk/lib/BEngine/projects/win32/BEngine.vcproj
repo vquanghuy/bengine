@@ -41,7 +41,6 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../include"
-				PreprocessorDefinitions="PLATFORM_WIN32"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -202,6 +201,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\include\bengine.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\include\bengine_header.h"
 			>

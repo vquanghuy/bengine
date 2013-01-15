@@ -1,6 +1,8 @@
 #ifndef _BENGINE_HEADER_H_
 #define _BENGINE_HEADER_H_
 
+#define PLATFORM_WIN32
+
 #include <string>
 
 #if defined(PLATFORM_WIN32) || defined(PLATFORM_ANDROID)
