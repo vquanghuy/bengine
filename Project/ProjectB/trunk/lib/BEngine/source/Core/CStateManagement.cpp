@@ -1,11 +1,13 @@
 #include "Core/CStateManagement.h"
 
+#include "bengine_header.h"
 #include "Core/CState.h"
 
 namespace BEngine
 {
 	CStateManagement::CStateManagement() : m_pCurrentState(0), m_pNextState(0)
 	{
+
 	}
 
 	CStateManagement::~CStateManagement()
@@ -18,7 +20,10 @@ namespace BEngine
 		if (m_pCurrentState != m_pNextState)
 		{
 			if (m_pCurrentState)
+			{
 				m_pCurrentState->Exit();
+				SAFE_DEL(m_pCurrentState);
+			}
 
 			if (m_pNextState)
 			{
