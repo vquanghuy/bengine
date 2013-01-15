@@ -3,6 +3,7 @@
 
 #ifdef PLATFORM_WIN32
 #	include <stdlib.h>
+#	include <windows.h>
 #elif defined(PLATFORM_ANDROID)
 #	include <android/log.h>
 #else	//platform ios

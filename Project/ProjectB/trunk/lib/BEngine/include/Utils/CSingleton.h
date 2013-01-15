@@ -7,13 +7,15 @@ namespace BEngine
 	class CSingleton
 	{
 	protected:
-		static T			m_sInstance;
+		static T*			m_sInstance;
 
 		CSingleton<T>();
 
 	public:
-		T					GetInstance();
-		void				DestroyInstance();
+		~CSingleton<T>();
+
+		static T*			GetInstance();
+		static void			DestroyInstance();
 	};
 }
 

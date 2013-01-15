@@ -10,10 +10,10 @@ namespace BEngine
 	}
 
 	template <class T>
-	T CSingleton<T>::m_sInstance = NULL;
+	T* CSingleton<T>::m_sInstance = NULL;
 
 	template <class T>
-	T CSingleton<T>::GetInstance()
+	T* CSingleton<T>::GetInstance()
 	{
 		if(!m_sInstance)
 		{
