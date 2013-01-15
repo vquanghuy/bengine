@@ -165,6 +165,18 @@
 		<Filter
 			Name="Core"
 			>
+			<File
+				RelativePath="..\..\include\Core\CState.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\source\Core\CStateManagement.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Core\CStateManagement.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Sounds"
