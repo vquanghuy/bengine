@@ -1,12 +1,18 @@
 #ifndef _BENGINE_MACROS_
 #define _BENGINE_MACROS_
 
+#ifdef PLATFORM_WIN32
+#	include <stdlib.h>
+#elif defined(PLATFORM_ANDROID)
+#	include <android/log.h>
+#else	//platform ios
+//TODO: add into later
+#endif
+
 namespace BEngine
 {
 	// compile - runtime helper
-	//fix it later
-	/*#ifdef PLATFORM_WIN32
-	#	include <stdlib.h>
+	#ifdef PLATFORM_WIN32	
 	#	define TODO(x) __pragma(message("[TODO]:" __FILE__ "("TOSTRING(__LINE__)") " TOSTRING(x))); LOGI(x);
 	#	define BREAK_IF(cond, _message) if (cond) {LOGE(_message); _asm int 3}
 	#	define BREAK(_message) BREAK_IF(true, _message)
@@ -18,14 +24,13 @@ namespace BEngine
 	#	define BREAK_IF(cond, _message) ;
 	#	define BREAK(cond, _message) ;
 	#	define EXEC(command)	;
-	#endif*/
+	#endif
 
 	// log helper
 	#ifdef PLATFORM_WIN32
 	#	define LOGI(...)	printf(__VA_ARGS__);printf("\n")
 	#	define LOGE(...)	printf(__VA_ARGS__);printf("\n");
-	#elif defined(PLATFORM_ANDROID)
-	#	include <android/log.h>
+	#elif defined(PLATFORM_ANDROID)	
 	#	define LOGI(...)  __android_log_print(ANDROID_LOG_INFO, "BEngine" ,__VA_ARGS__)
 	#	define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR, "BEngine" ,__VA_ARGS__)
 	#endif
