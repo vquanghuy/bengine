@@ -200,6 +200,10 @@
 				RelativePath="..\..\include\Platform\CPlatformWin32.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\include\IPlatform.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\include\bengine.h"

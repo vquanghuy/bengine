@@ -105,6 +105,15 @@ namespace BEngine
 		return m_bInit;
 	}
 
+	void CPlatformWin32::Create()
+	{
+		if (!m_bInit)
+		{
+			CreateWin32View();
+			m_bInit = true;
+		}
+	}
+
 	void CPlatformWin32::Create(__INT32 iWidth, __INT32 iHeight, __STRING sTitle, __BOOL bFullscreen)
 	{
 		if (!m_bInit)
@@ -126,6 +135,14 @@ namespace BEngine
 		if (m_bInit)
 		{
 			DestroyWin32View();
+
+			//reset all variable to default value
+			m_bFullScreen = false;
+			m_bInit = false;
+			m_iWidth = 800;
+			m_iHeight = 600;
+			m_sTitle = "Game";
+
 			m_bInit = false;
 		}
 	}

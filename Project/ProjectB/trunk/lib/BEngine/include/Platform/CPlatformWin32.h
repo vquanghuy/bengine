@@ -6,10 +6,11 @@
 #ifdef PLATFORM_WIN32
 
 #include "Utils/CSingleton.h"
+#include "IPlatform.h"
 
 namespace BEngine
 {
-	class CPlatformWin32 : public CSingleton<CPlatformWin32>
+	class CPlatformWin32 : public CSingleton<CPlatformWin32>, public IPlatform
 	{
 		friend class CSingleton<CPlatformWin32>;
 		
@@ -45,7 +46,8 @@ namespace BEngine
 		__BOOL			IsFullScreen();
 		__BOOL			IsInit();
 
-		void			Create(__INT32 iWidth = 800 , __INT32 iHeight = 600, __STRING sTitle = "Game", __BOOL bFullscreen = false);
+		void			Create();
+		void			Create(__INT32 iWidth, __INT32 iHeight, __STRING sTitle = "Game", __BOOL bFullscreen = false);		
 		void			Destroy();
 
 		void			Update();
