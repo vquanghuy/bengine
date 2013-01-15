@@ -1,14 +1,28 @@
+#ifndef _CSINGLETON_CPP_
+#define _CSINGLETON_CPP_
+
 #include "Utils/CSingleton.h"
 
 #include "bengine_header.h"
 
 namespace BEngine
 {
+	///////////////////////////////////////////
+	//constructor and destructor
+	///////////////////////////////////////////
 	template <class T>
 	CSingleton<T>::CSingleton()
 	{
 	}
 
+	template <class T>
+	CSingleton<T>::~CSingleton()
+	{
+	}
+
+	///////////////////////////////////////////
+	//static function
+	///////////////////////////////////////////
 	template <class T>
 	T* CSingleton<T>::m_sInstance = NULL;
 
@@ -17,7 +31,7 @@ namespace BEngine
 	{
 		if(!m_sInstance)
 		{
-			m_sInstance = new CSingleton<T>;
+			m_sInstance = new T();
 		}
 
 		return m_sInstance;	
@@ -34,3 +48,5 @@ namespace BEngine
 		m_sInstance = NULL;
 	}
 }
+
+#endif

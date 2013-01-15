@@ -19,4 +19,6 @@ namespace BEngine
 	};
 }
 
+#include "../../source/Utils/CSingleton.cpp"
+
 #endif
