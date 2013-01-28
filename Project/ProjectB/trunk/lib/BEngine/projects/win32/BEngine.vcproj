@@ -217,6 +217,10 @@
 			RelativePath="..\..\include\bengine_macros.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\include\bengine_types.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -2,7 +2,6 @@
 #define _BENGINE_H_
 
 #include "bengine_header.h"
-#include "bengine_macros.h"
 
 #include "Utils/CSingleton.h"
 #include "Core/CState.h"
