@@ -178,14 +178,11 @@ namespace BEngine
         }
 		else
 		{
-			glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			SwapBuffers(m_hDisplay);
+			RefeshGL();
 		}
 	}
 
-	__BOOL CPlatformWin32::InitGL()
+	void CPlatformWin32::InitGL()
 	{
 		PIXELFORMATDESCRIPTOR pfd;
 		int iFormat;
@@ -205,8 +202,17 @@ namespace BEngine
 		//init hdc and hrc
 		HGLRC hRC = wglCreateContext(m_hDisplay);
 		wglMakeCurrent(m_hDisplay, hRC);
+	}
 
-		return false;
+	void CPlatformWin32::RefeshGL()
+	{
+		SwapBuffers(m_hDisplay);
+
+		glEnable(GL_DEPTH_TEST);
+		glDepthMask(true);
+		glDepthFunc(GL_LEQUAL);
+		glClearDepth(1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 }
 
