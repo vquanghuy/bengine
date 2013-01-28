@@ -10,6 +10,9 @@
 
 namespace BEngine
 {
+	//////////////////////////////////////
+	// CPlatformWin32 class
+	//////////////////////////////////////
 	class CPlatformWin32 : public CSingleton<CPlatformWin32>, public IPlatform
 	{
 		friend class CSingleton<CPlatformWin32>;
@@ -23,6 +26,7 @@ namespace BEngine
 		__BOOL			m_bFullScreen;
 		__STRING		m_sTitle;
 		__BOOL			m_bInit;
+		__BOOL			m_bUseOpenGLES;
 
 		//handle windows
 		HWND			m_hWindow;
@@ -41,16 +45,37 @@ namespace BEngine
 	public:
 		virtual ~CPlatformWin32();
 
+		//////////////////////////////////////
+		// get basic info function
+		//////////////////////////////////////
 		__INT32			GetWidth();
 		__INT32			GetHeight();
 		__BOOL			IsFullScreen();
 		__BOOL			IsInit();
 
+		//////////////////////////////////////
+		// create and destroy window function
+		//////////////////////////////////////
 		void			Create();
-		void			Create(__INT32 iWidth, __INT32 iHeight, __STRING sTitle = "Game", __BOOL bFullscreen = false);		
+		void			Create(__INT32 iWidth, __INT32 iHeight, __BOOL bUseOpenGLES = false, __STRING sTitle = "Game", __BOOL bFullscreen = false);		
 		void			Destroy();
 
+		//////////////////////////////////////
+		// update function
+		//////////////////////////////////////
 		void			Update();
+
+		//////////////////////////////////////
+		// OpenGL function
+		//////////////////////////////////////
+		__BOOL			InitGL();
+
+		//////////////////////////////////////
+		// OpenGL ES function
+		// !!!!! IMPLEMENT LATER !!!!!
+		//////////////////////////////////////
+		
+
 	};
 }
 

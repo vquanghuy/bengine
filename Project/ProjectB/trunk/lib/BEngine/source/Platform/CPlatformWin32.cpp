@@ -2,13 +2,18 @@
 
 #ifdef PLATFORM_WIN32
 
+//include for OpenGL
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
 namespace BEngine
 {
 	CPlatformWin32::CPlatformWin32() :	m_bFullScreen(false),
 								m_bInit(false),
 								m_iWidth(800),
 								m_iHeight(600),
-								m_sTitle("Game")
+								m_sTitle("Game"),
+								m_bUseOpenGLES(false)
 	{
 	}
 
@@ -55,6 +60,8 @@ namespace BEngine
 		ShowWindow(m_hWindow, SW_SHOW);
 		SetForegroundWindow(m_hWindow);
 		SetFocus(m_hWindow);
+
+		m_hDisplay = GetDC(m_hWindow);
 	}
 
 	LRESULT CALLBACK CPlatformWin32::WndProc(HWND hWnd, UINT uiMsg, WPARAM wParam, LPARAM lParam) 
@@ -110,11 +117,15 @@ namespace BEngine
 		if (!m_bInit)
 		{
 			CreateWin32View();
+
+			if (!m_bUseOpenGLES)
+				InitGL();
+
 			m_bInit = true;
 		}
 	}
 
-	void CPlatformWin32::Create(__INT32 iWidth, __INT32 iHeight, __STRING sTitle, __BOOL bFullscreen)
+	void CPlatformWin32::Create(__INT32 iWidth, __INT32 iHeight, __BOOL bUseOpenGLES, __STRING sTitle, __BOOL bFullscreen)
 	{
 		if (!m_bInit)
 		{
@@ -122,8 +133,12 @@ namespace BEngine
 			m_iHeight = iHeight;
 			m_sTitle = sTitle;
 			m_bFullScreen = bFullscreen;
+			m_bUseOpenGLES = bUseOpenGLES;
 
 			CreateWin32View();
+
+			if (!m_bUseOpenGLES)
+				InitGL();
 
 			m_bInit = true;
 		}
@@ -149,14 +164,49 @@ namespace BEngine
 
 	void CPlatformWin32::Update()
 	{
-		if(PeekMessage(&m_sMessage, NULL, 0, 0, PM_REMOVE)) {
-            if(m_sMessage.message == WM_QUIT) {
+		if(PeekMessage(&m_sMessage, NULL, 0, 0, PM_REMOVE)) 
+		{
+            if(m_sMessage.message == WM_QUIT) 
+			{
                 
-            } else {
+            } 
+			else 
+			{
                 TranslateMessage(&m_sMessage);
                 DispatchMessage(&m_sMessage);
             }
         }
+		else
+		{
+			glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+
+			SwapBuffers(m_hDisplay);
+		}
+	}
+
+	__BOOL CPlatformWin32::InitGL()
+	{
+		PIXELFORMATDESCRIPTOR pfd;
+		int iFormat;
+
+		ZeroMemory(&pfd, sizeof(pfd));
+
+		pfd.nSize  = sizeof(pfd);
+		pfd.nVersion = 1;
+		pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+		pfd.iPixelType = PFD_TYPE_RGBA;
+		pfd.cColorBits = 24;
+		pfd.cDepthBits = 16;
+		pfd.iLayerType = PFD_MAIN_PLANE;
+		iFormat = ChoosePixelFormat(m_hDisplay, &pfd);
+		SetPixelFormat(m_hDisplay, iFormat, &pfd);
+
+		//init hdc and hrc
+		HGLRC hRC = wglCreateContext(m_hDisplay);
+		wglMakeCurrent(m_hDisplay, hRC);
+
+		return false;
 	}
 }
 

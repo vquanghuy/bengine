@@ -2,6 +2,7 @@
 #define _CSTATE_MANAGEMENT_H_
 
 #include "Utils/CSingleton.h"
+#include "bengine_header.h"
 
 namespace BEngine
 {
@@ -19,7 +20,7 @@ namespace BEngine
 	public:
 		virtual ~CStateManagement();
 
-		virtual void		Update(bool isPause = false);
+		virtual void		Update(__BOOL isPause = false);
 		virtual void		SwitchState(CState* pNextState);
 	};
 }
