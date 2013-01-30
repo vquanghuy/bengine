@@ -184,6 +184,14 @@
 		<Filter
 			Name="Graphics"
 			>
+			<File
+				RelativePath="..\..\source\Graphics\CGL30Driver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Graphics\CGL30Driver.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="IO"
