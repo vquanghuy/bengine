@@ -185,11 +185,23 @@
 			Name="Graphics"
 			>
 			<File
-				RelativePath="..\..\source\Graphics\CGL30Driver.cpp"
+				RelativePath="..\..\source\Graphics\CGLDriver.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\Graphics\CGL30Driver.h"
+				RelativePath="..\..\include\Graphics\CGLDriver.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\source\Graphics\CGLGraphics2D.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Graphics\CGLGraphics2D.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Graphics\IGraphics2D.h"
 				>
 			</File>
 		</Filter>

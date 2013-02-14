@@ -1,5 +1,5 @@
-#ifndef _CGL30_DRIVER_H_
-#define _CGL30_DRIVER_H_
+#ifndef _CGL_DRIVER_H_
+#define _CGL_DRIVER_H_
 
 #include "Utils/CSingleton.h"
 
@@ -41,9 +41,9 @@ namespace BEngine
 		EGLD_RENDER_MODE_TRIANGLE_FAN = GL_TRIANGLE_FAN
 	};
 
-	class CGL30Driver : public CSingleton<CGL30Driver>
+	class CGLDriver : public CSingleton<CGLDriver>
 	{
-		friend class CSingleton<CGL30Driver>;
+		friend class CSingleton<CGLDriver>;
 
 	private:
 		__BOOL					m_isUseAttribPointer[EGLD_ATTRIB_TEXCOOR - EGLD_ATTRIB_VERTEX + 1];
@@ -54,8 +54,8 @@ namespace BEngine
 
 	protected:
 		//constructor and destructor
-		CGL30Driver();
-		virtual ~CGL30Driver();
+		CGLDriver();
+		virtual ~CGLDriver();
 
 	public:
 		//////////////////////////////////////////////////////////////////////////
