@@ -1,4 +1,4 @@
-#include "Graphics/CGL30Driver.h"
+#include "Graphics/CGLDriver.h"
 
 namespace BEngine
 {
@@ -44,7 +44,7 @@ namespace BEngine
 
 	void CGLDriver::SetColor(SColor4i color)
 	{
-		SetColor(color.R, color.G, color.B, color.A);
+		SetColor((__FLOAT) color.R, (__FLOAT) color.G, (__FLOAT) color.B, (__FLOAT) color.A);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -167,7 +167,7 @@ namespace BEngine
 	//////////////////////////////////////////////////////////////////////////
 	void CGLDriver::SetViewport(SRect rect)
 	{
-		glViewport(rect.X, rect.Y, rect.W, rect.H);
+		glViewport((GLsizei) rect.X, (GLsizei) rect.Y, (GLsizei) rect.W, (GLsizei) rect.H);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
