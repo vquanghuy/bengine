@@ -23,6 +23,10 @@ typedef struct
    // Handle to a program object
    GLuint programObject;
 
+   // handle to attrib
+   GLuint attribPosition;
+   GLuint attribColor;
+
 } UserData;
 
 ///
@@ -159,9 +163,14 @@ int Init ( ESContext *esContext )
    glAttachShader ( programObject, vertexShader );
    glAttachShader ( programObject, fragmentShader );
 
-   // Bind vPosition to attribute 0   
-   glBindAttribLocation ( programObject, 0, "vPosition" );
-   glBindAttribLocation ( programObject, 1, "vColor" );
+   // Bind vPosition to attribute 0
+   GLuint attribColor, attribPosition;
+
+	attribPosition = 0;
+	attribColor = 1;
+
+   glBindAttribLocation ( programObject, attribPosition, "vPosition" );
+   glBindAttribLocation ( programObject, attribColor, "vColor" );
 
    // Link the program
    glLinkProgram ( programObject );
@@ -191,6 +200,8 @@ int Init ( ESContext *esContext )
 
    // Store the program object
    userData->programObject = programObject;
+   userData->attribPosition = attribPosition;
+   userData->attribColor = attribColor;
 
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
    return TRUE;
@@ -222,11 +233,11 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex data
-   glVertexAttribPointer ( 0, 3, GL_FLOAT, GL_FALSE, 0, vVertices );
-   glVertexAttribPointer ( 1, 4, GL_FLOAT, GL_FALSE, 0, vColor );
+   glVertexAttribPointer ( userData->attribPosition, 3, GL_FLOAT, GL_FALSE, 0, vVertices );
+   glVertexAttribPointer ( userData->attribColor, 4, GL_FLOAT, GL_FALSE, 0, vColor );
 
-   glEnableVertexAttribArray ( 0 );
-   glEnableVertexAttribArray ( 1 );
+   glEnableVertexAttribArray ( userData->attribPosition );
+   glEnableVertexAttribArray ( userData->attribColor );
 
    glDrawArrays ( GL_TRIANGLES, 0, 3 );
 
