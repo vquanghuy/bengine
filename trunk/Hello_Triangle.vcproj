@@ -181,6 +181,14 @@
 			RelativePath=".\Hello_Triangle.cpp"
 			>
 		</File>
+		<File
+			RelativePath=".\shader.fs"
+			>
+		</File>
+		<File
+			RelativePath=".\shader.vs"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
