@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="Hello_Triangle"
 	ProjectGUID="{8278251F-6C1F-4D80-8499-FA7B590FAFE6}"
 	RootNamespace="Hello_Triangle"
@@ -178,7 +178,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\Hello_Triangle.c"
+			RelativePath=".\Hello_Triangle.cpp"
 			>
 		</File>
 	</Files>
