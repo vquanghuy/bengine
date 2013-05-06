@@ -15,6 +15,7 @@
 //    example is to demonstrate the basic concepts of 
 //    OpenGL ES 2.0 rendering.
 #include <stdlib.h>
+#include <stdio.h>
 #include "esUtil.h"
 
 typedef struct
@@ -72,6 +73,52 @@ GLuint LoadShader ( GLenum type, const char *shaderSrc )
 
 }
 
+GLuint LoadShaderFromFile( GLenum type, const char *fileSrc )
+{
+	FILE* f = fopen(fileSrc, "rb");
+
+	if(!f)
+	{
+		esLogMessage( "Error: Can't load shader file: %s", fileSrc);
+		return 0;
+	}
+
+	char *shaderBuffer;
+	int lSize;
+
+	// obtain file size:
+	fseek (f , 0 , SEEK_END);
+	lSize = ftell(f);
+	rewind(f);
+
+	// allocate memory to contain the whole file:
+	shaderBuffer = new char[lSize+1];
+	if (shaderBuffer == NULL) 
+	{
+		esLogMessage("Memory error !");
+		return 0;
+	}
+	memset(shaderBuffer, 0, sizeof(char)*(lSize+1));
+
+	// copy the file into the buffer:
+	int result = fread(shaderBuffer, sizeof(char), lSize, f);
+	if (result != lSize)
+	{
+		esLogMessage("Reading error");
+		return 0;
+	}
+
+	//load shader
+	GLuint shader = LoadShader(type, shaderBuffer);
+
+	//clean up
+	delete[] shaderBuffer;
+	fclose(f);
+
+	//return shader
+	return shader;
+}
+
 ///
 // Initialize the shader and program object
 //
@@ -98,8 +145,10 @@ int Init ( ESContext *esContext )
    GLint linked;
 
    // Load the vertex/fragment shaders
-   vertexShader = LoadShader ( GL_VERTEX_SHADER, vShaderStr );
-   fragmentShader = LoadShader ( GL_FRAGMENT_SHADER, fShaderStr );
+   //vertexShader = LoadShader ( GL_VERTEX_SHADER, vShaderStr );
+   //fragmentShader = LoadShader ( GL_FRAGMENT_SHADER, fShaderStr );
+   vertexShader = LoadShaderFromFile ( GL_VERTEX_SHADER, "shader.vs" );
+   fragmentShader = LoadShaderFromFile ( GL_FRAGMENT_SHADER, "shader.fs" );
 
    // Create the program object
    programObject = glCreateProgram ( );
