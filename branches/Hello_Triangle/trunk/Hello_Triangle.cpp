@@ -161,6 +161,7 @@ int Init ( ESContext *esContext )
 
    // Bind vPosition to attribute 0   
    glBindAttribLocation ( programObject, 0, "vPosition" );
+   glBindAttribLocation ( programObject, 1, "vColor" );
 
    // Link the program
    glLinkProgram ( programObject );
@@ -204,6 +205,12 @@ void Draw ( ESContext *esContext )
    GLfloat vVertices[] = {  0.0f,  0.5f, 0.0f, 
                            -0.5f, -0.5f, 0.0f,
                             0.5f, -0.5f, 0.0f };
+
+   GLfloat vColor[] = {
+						1.0f, 0.0f, 0.0f, 1.0f,
+						0.0f, 1.0f, 0.0f, 1.0f,
+						0.0f, 0.0f, 1.0f, 1.0f
+						};
       
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
@@ -216,7 +223,10 @@ void Draw ( ESContext *esContext )
 
    // Load the vertex data
    glVertexAttribPointer ( 0, 3, GL_FLOAT, GL_FALSE, 0, vVertices );
+   glVertexAttribPointer ( 1, 4, GL_FLOAT, GL_FALSE, 0, vColor );
+
    glEnableVertexAttribArray ( 0 );
+   glEnableVertexAttribArray ( 1 );
 
    glDrawArrays ( GL_TRIANGLES, 0, 3 );
 
@@ -232,7 +242,7 @@ int main ( int argc, char *argv[] )
    esInitContext ( &esContext );
    esContext.userData = &userData;
 
-   esCreateWindow ( &esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
+   esCreateWindow ( &esContext, "Hello Triangle", 480, 320, ES_WINDOW_RGB );
    
    if ( !Init ( &esContext ) )
       return 0;
