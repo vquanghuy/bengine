@@ -18,6 +18,9 @@
 #include <stdio.h>
 #include "esUtil.h"
 
+#define SCREEN_WIDTH 480
+#define SCREEN_HEIGHT 320
+
 typedef struct
 {
    // Handle to a program object
@@ -26,9 +29,15 @@ typedef struct
    // handle to attrib
    GLuint attribPosition;
    GLuint attribColor;
+   GLuint uniMatModelLoc;
+   GLuint uniMatViewLoc;
+   GLuint uniMatProjLoc;
 
 } UserData;
 
+ESMatrix matView;		//also camera mat
+ESMatrix matModel;
+ESMatrix matProj;
 ///
 // Create a shader object, load the shader source, and
 // compile the shader.
@@ -124,6 +133,16 @@ GLuint LoadShaderFromFile( GLenum type, const char *fileSrc )
 }
 
 ///
+// Reset MVP matrix
+//
+void ResetMVPMatrix()
+{
+	esMatrixLoadIdentity(&matModel);
+	esMatrixLoadIdentity(&matView);
+	esMatrixLoadIdentity(&matProj);
+}
+
+///
 // Initialize the shader and program object
 //
 int Init ( ESContext *esContext )
@@ -170,7 +189,7 @@ int Init ( ESContext *esContext )
 	attribColor = 1;
 
    glBindAttribLocation ( programObject, attribPosition, "vPosition" );
-   glBindAttribLocation ( programObject, attribColor, "vColor" );
+   glBindAttribLocation ( programObject, attribColor, "vColor" );   
 
    // Link the program
    glLinkProgram ( programObject );
@@ -203,7 +222,17 @@ int Init ( ESContext *esContext )
    userData->attribPosition = attribPosition;
    userData->attribColor = attribColor;
 
+   userData->uniMatModelLoc = glGetUniformLocation(programObject, "mModel");
+   userData->uniMatProjLoc = glGetUniformLocation(programObject, "mProj");
+   userData->uniMatViewLoc = glGetUniformLocation(programObject, "mView");
+
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+
+   // load default matrix value
+   ResetMVPMatrix();
+
+   esPerspective(&matProj, 60, int(SCREEN_WIDTH / SCREEN_HEIGHT), 0.1, 500);
+
    return TRUE;
 }
 
@@ -213,16 +242,19 @@ int Init ( ESContext *esContext )
 void Draw ( ESContext *esContext )
 {
    UserData *userData = (UserData*) esContext->userData;
-   GLfloat vVertices[] = {  0.0f,  0.5f, 0.0f, 
-                           -0.5f, -0.5f, 0.0f,
-                            0.5f, -0.5f, 0.0f };
+   GLfloat vVertices[] = {  0.0f,  0.5f, -1.5f, 
+                           -0.5f, -0.5f, -1.5f,
+                            0.5f, -0.5f, -1.5f };
 
    GLfloat vColor[] = {
 						1.0f, 0.0f, 0.0f, 1.0f,
 						0.0f, 1.0f, 0.0f, 1.0f,
 						0.0f, 0.0f, 1.0f, 1.0f
 						};
-      
+   
+   // rotate the model
+   esRotate(&matModel, 1, 0, 0, 1);
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
    
@@ -239,6 +271,11 @@ void Draw ( ESContext *esContext )
    glEnableVertexAttribArray ( userData->attribPosition );
    glEnableVertexAttribArray ( userData->attribColor );
 
+   // Load the uniform data
+   glUniformMatrix4fv( userData->uniMatModelLoc, 1, GL_FALSE, &matModel.m[0][0]);
+   glUniformMatrix4fv( userData->uniMatProjLoc, 1, GL_FALSE, &matProj.m[0][0]);
+   glUniformMatrix4fv( userData->uniMatViewLoc, 1, GL_FALSE, &matView.m[0][0]);
+
    glDrawArrays ( GL_TRIANGLES, 0, 3 );
 
    eglSwapBuffers ( esContext->eglDisplay, esContext->eglSurface );
@@ -253,7 +290,7 @@ int main ( int argc, char *argv[] )
    esInitContext ( &esContext );
    esContext.userData = &userData;
 
-   esCreateWindow ( &esContext, "Hello Triangle", 480, 320, ES_WINDOW_RGB );
+   esCreateWindow ( &esContext, "Hello Triangle", SCREEN_WIDTH, SCREEN_HEIGHT, ES_WINDOW_RGB );
    
    if ( !Init ( &esContext ) )
       return 0;
