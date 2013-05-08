@@ -178,6 +178,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath=".\Camera.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Camera.h"
+			>
+		</File>
+		<File
 			RelativePath=".\Hello_Triangle.cpp"
 			>
 		</File>
