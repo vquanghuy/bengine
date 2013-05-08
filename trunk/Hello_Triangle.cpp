@@ -236,6 +236,12 @@ int Init ( ESContext *esContext )
    return TRUE;
 }
 
+void Update ( ESContext *esContext, float dt)
+{
+	// rotate the model
+   esRotate(&matModel, 1, 0, 0, 1);
+}
+
 ///
 // Draw a triangle using the shader pair created in Init()
 //
@@ -250,10 +256,7 @@ void Draw ( ESContext *esContext )
 						1.0f, 0.0f, 0.0f, 1.0f,
 						0.0f, 1.0f, 0.0f, 1.0f,
 						0.0f, 0.0f, 1.0f, 1.0f
-						};
-   
-   // rotate the model
-   esRotate(&matModel, 1, 0, 0, 1);
+						};  
 
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
@@ -296,6 +299,7 @@ int main ( int argc, char *argv[] )
       return 0;
 
    esRegisterDrawFunc ( &esContext, Draw );
+   esRegisterUpdateFunc ( &esContext, Update );
    
    esMainLoop ( &esContext );
 }
