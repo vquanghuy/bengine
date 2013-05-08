@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include "esUtil.h"
 
+#include "Camera.h"
+
 #define SCREEN_WIDTH 480
 #define SCREEN_HEIGHT 320
 
@@ -38,6 +40,9 @@ typedef struct
 ESMatrix matView;		//also camera mat
 ESMatrix matModel;
 ESMatrix matProj;
+
+//add camera
+Camera gCam;
 ///
 // Create a shader object, load the shader source, and
 // compile the shader.
@@ -231,6 +236,9 @@ int Init ( ESContext *esContext )
    // load default matrix value
    ResetMVPMatrix();
 
+   //init camera   
+   gCam.Init();
+
    esPerspective(&matProj, 60, int(SCREEN_WIDTH / SCREEN_HEIGHT), 0.1, 500);
 
    return TRUE;
@@ -238,8 +246,40 @@ int Init ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float dt)
 {
-	// rotate the model
-   esRotate(&matModel, 1, 0, 0, 1);
+	// rotate the model	
+	matView = gCam.GetCamera();	
+}
+
+void Key ( ESContext *esContext, unsigned char key, int x, int y )
+{
+	switch(key)
+	{
+	case 'w':
+	case 'W': gCam.MoveY(0.1);		break;
+	case 's':
+	case 'S': gCam.MoveY(-0.1);		break;
+	case 'a':
+	case 'A': gCam.MoveX(-0.1);		break;
+	case 'd':
+	case 'D': gCam.MoveX(0.1);		break;
+	case 'q':
+	case 'Q': gCam.MoveZ(-0.1);		break;
+	case 'e':
+	case 'E': gCam.MoveZ(0.1);		break;
+
+	case 'i':
+	case 'I': gCam.RotX(1);		break;
+	case 'k':
+	case 'K': gCam.RotX(-1);		break;
+	case 'j':
+	case 'J': gCam.RotY(1);		break;
+	case 'l':
+	case 'L': gCam.RotY(-1);		break;
+	case 'u':
+	case 'U': gCam.RotZ(-1);		break;
+	case 'o':
+	case 'O': gCam.RotZ(1);		break;
+	}
 }
 
 ///
@@ -300,6 +340,7 @@ int main ( int argc, char *argv[] )
 
    esRegisterDrawFunc ( &esContext, Draw );
    esRegisterUpdateFunc ( &esContext, Update );
+   esRegisterKeyFunc ( &esContext, Key );
    
    esMainLoop ( &esContext );
 }
