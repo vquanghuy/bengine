@@ -255,13 +255,13 @@ void Key ( ESContext *esContext, unsigned char key, int x, int y )
 	switch(key)
 	{
 	case 'w':
-	case 'W': gCam.MoveY(0.1);		break;
+	case 'W': gCam.MoveY(-0.1);		break;
 	case 's':
-	case 'S': gCam.MoveY(-0.1);		break;
+	case 'S': gCam.MoveY(0.1);		break;
 	case 'a':
-	case 'A': gCam.MoveX(-0.1);		break;
+	case 'A': gCam.MoveX(0.1);		break;
 	case 'd':
-	case 'D': gCam.MoveX(0.1);		break;
+	case 'D': gCam.MoveX(-0.1);		break;
 	case 'q':
 	case 'Q': gCam.MoveZ(-0.1);		break;
 	case 'e':
