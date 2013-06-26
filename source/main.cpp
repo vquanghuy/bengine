@@ -5,10 +5,10 @@ using namespace std;
 
 int main()
 {
-	BEngine::CPlatformWin32::GetInstance()->Create();
+	BEngine::WGLDisplay::GetInstance()->Create();
 
 	while(true)
-		BEngine::CPlatformWin32::GetInstance()->Update();
+		BEngine::WGLDisplay::GetInstance()->Update();
 
 	return 0;
 }
