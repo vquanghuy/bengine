@@ -6,7 +6,7 @@
 #include "Utils/CSingleton.h"
 #include "Core/CState.h"
 #include "Core/CStateManagement.h"
-#include "Platform/CPlatformWin32.h"
+#include "Platform/WGLDisplay.h"
 
 #ifdef PLATFORM_WIN32
 #pragma comment(lib,"opengl32.lib")

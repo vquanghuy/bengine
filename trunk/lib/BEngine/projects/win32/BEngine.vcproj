@@ -213,15 +213,15 @@
 			Name="Platform"
 			>
 			<File
-				RelativePath="..\..\source\Platform\CPlatformWin32.cpp"
+				RelativePath="..\..\include\Display.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\Platform\CPlatformWin32.h"
+				RelativePath="..\..\source\Platform\WGLDisplay.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\IPlatform.h"
+				RelativePath="..\..\include\Platform\WGLDisplay.h"
 				>
 			</File>
 		</Filter>
