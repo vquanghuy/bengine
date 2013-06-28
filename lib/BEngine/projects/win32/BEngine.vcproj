@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\include\Platform\DisplayMode.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\source\Platform\WGLDisplay.cpp"
 				>
 			</File>

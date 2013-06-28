@@ -81,7 +81,7 @@ namespace BEngine
 		//temp here
 		////////////////////////////////////
 		//init the display - return true if success
-		virtual bool		Init() { return true; };
+		virtual bool		Init(const DisplayMode& dmode) { return true; };
 		//swap buffer
 		virtual void		Swap() { };	
 		virtual void		Cleanup() { };

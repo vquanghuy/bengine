@@ -17,12 +17,12 @@ namespace math
 			this->lowerRight = lowerRight;
 		};
 
-		s32 getWidth()
+		T getWidth()
 		{
 			return upperLeft.x - lowerRight.x;
 		}
 
-		s32 getHight()
+		T getHight()
 		{
 			return upperLeft.y - lowerRight.y;
 		}
