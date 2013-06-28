@@ -153,11 +153,23 @@
 			Name="Utils"
 			>
 			<File
+				RelativePath="..\..\include\Utils\bmath.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\source\Utils\CSingleton.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\include\Utils\CSingleton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Utils\rectT.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Utils\vecT.h"
 				>
 			</File>
 		</Filter>
@@ -213,7 +225,7 @@
 			Name="Platform"
 			>
 			<File
-				RelativePath="..\..\include\Display.h"
+				RelativePath="..\..\include\Platform\Display.h"
 				>
 			</File>
 			<File
