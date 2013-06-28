@@ -32,25 +32,25 @@ namespace BEngine
 	//////////////////////////////////////////////////////////////////////////
 	//set color function
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::SetColor(__FLOAT red, __FLOAT green, __FLOAT blue, __FLOAT alpha)
+	void CGLDriver::SetColor(float red, float green, float blue, float alpha)
 	{
 		glColor4f(red/255.0f, green/255.0f, blue/255.0f, alpha/255.0f);
 	}
 
-	void CGLDriver::SetColor(SColor4f color)
+	void CGLDriver::SetColor(math::vec4f color)
 	{
-		SetColor(color.R, color.G, color.B, color.A);
+		SetColor(color.x, color.y, color.z, color.w);
 	}
 
-	void CGLDriver::SetColor(SColor4i color)
+	void CGLDriver::SetColor(math::vec4i color)
 	{
-		SetColor((__FLOAT) color.R, (__FLOAT) color.G, (__FLOAT) color.B, (__FLOAT) color.A);
+		SetColor((float) color.x, (float) color.y, (float) color.z, (float) color.w);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	//Set Blending
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::EnableBlending(__BOOL enable)
+	void CGLDriver::EnableBlending(bool enable)
 	{
 		if (m_isUseAlpha != enable)
 		{
@@ -68,7 +68,7 @@ namespace BEngine
 		}
 	}
 
-	__BOOL CGLDriver::IsUseBlending()
+	bool CGLDriver::IsUseBlending()
 	{
 		return m_isUseAlpha;
 	}
@@ -76,7 +76,7 @@ namespace BEngine
 	//////////////////////////////////////////////////////////////////////////
 	//Attribute pointer
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::AttributePointer(enum EGL30DriverAttribType attribType, __INT32 size, enum EGL30DriverPrimaryType primType, __UINT32 stride, void* pointer)
+	void CGLDriver::AttributePointer(enum EGL30DriverAttribType attribType, s32 size, enum EGL30DriverPrimaryType primType, u32 stride, void* pointer)
 	{
 		switch(attribType)
 		{
@@ -102,7 +102,7 @@ namespace BEngine
 	//////////////////////////////////////////////////////////////////////////
 	//Enable client state (enable / disable attrib pointer)
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::EnableAttribPointer(enum EGL30DriverAttribType attribType, __BOOL isUse)
+	void CGLDriver::EnableAttribPointer(enum EGL30DriverAttribType attribType, bool isUse)
 	{
 		if (isUse)
 		{
@@ -125,7 +125,7 @@ namespace BEngine
 	//////////////////////////////////////////////////////////////////////////
 	//Draw Array
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::DrawElements(enum EGL30DriverRenderMode mode, __UINT32 numOfIndices, enum EGL30DriverPrimaryType primType, void *indices)
+	void CGLDriver::DrawElements(enum EGL30DriverRenderMode mode, u32 numOfIndices, enum EGL30DriverPrimaryType primType, void *indices)
 	{
 		if (indices == 0)
 		{
@@ -143,12 +143,12 @@ namespace BEngine
 		}
 	}
 
-	void CGLDriver::DrawElements(enum EGL30DriverRenderMode mode, __UINT32 numOfIndices)
+	void CGLDriver::DrawElements(enum EGL30DriverRenderMode mode, u32 numOfIndices)
 	{
 		DrawElements(mode, numOfIndices, EGLD_PRITYPE_UINT, 0);
 	}
 
-	void CGLDriver::DrawArrays(enum EGL30DriverMatrixMode mode, __UINT32 first, __UINT32 size)
+	void CGLDriver::DrawArrays(enum EGL30DriverMatrixMode mode, u32 first, u32 size)
 	{
 		glDrawArrays(mode, first, size);
 	}
@@ -156,24 +156,24 @@ namespace BEngine
 	//////////////////////////////////////////////////////////////////////////
 	//Clear screen
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::Clear(SColor4f color)
+	void CGLDriver::Clear(math::vec4f color)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
+		glClearColor(color.x / 255.0f, color.y / 255.0f, color.z / 255.0f, color.w / 255.0f);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	//Set viewport
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::SetViewport(SRect rect)
+	void CGLDriver::SetViewport(math::rectf rect)
 	{
-		glViewport((GLsizei) rect.X, (GLsizei) rect.Y, (GLsizei) rect.W, (GLsizei) rect.H);
+		glViewport((GLsizei) rect.upperLeft.x, (GLsizei) rect.upperLeft.y, (GLsizei) rect.getWidth(), (GLsizei) rect.getHight());
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// Orthor
 	//////////////////////////////////////////////////////////////////////////
-	void CGLDriver::Orthor(__FLOAT left, __FLOAT right, __FLOAT top, __FLOAT bottom, __FLOAT znear, __FLOAT zfar)
+	void CGLDriver::Orthor(float left, float right, float top, float bottom, float znear, float zfar)
 	{
 		glOrtho(left, right, bottom, top, znear, zfar);
 	}

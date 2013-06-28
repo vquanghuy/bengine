@@ -20,7 +20,7 @@ namespace BEngine
 	public:
 		virtual ~CStateManagement();
 
-		virtual void		Update(__BOOL isPause = false);
+		virtual void		Update(bool isPause = false);
 		virtual void		SwitchState(CState* pNextState);
 	};
 }

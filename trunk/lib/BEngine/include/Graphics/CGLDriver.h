@@ -46,11 +46,11 @@ namespace BEngine
 		friend class CSingleton<CGLDriver>;
 
 	private:
-		__BOOL					m_isUseAttribPointer[EGLD_ATTRIB_TEXCOOR - EGLD_ATTRIB_VERTEX + 1];
-		__UINT32				m_iAttribMapping[EGLD_ATTRIB_TEXCOOR - EGLD_ATTRIB_VERTEX + 1];
-		__UINT32				m_iAutoIndices[EGLD_DEFAULT_MAX_INDIES];
+		bool					m_isUseAttribPointer[EGLD_ATTRIB_TEXCOOR - EGLD_ATTRIB_VERTEX + 1];
+		u32				m_iAttribMapping[EGLD_ATTRIB_TEXCOOR - EGLD_ATTRIB_VERTEX + 1];
+		u32				m_iAutoIndices[EGLD_DEFAULT_MAX_INDIES];
 		EGL30DriverMatrixMode	m_eCurrentMatrixMode;
-		__BOOL					m_isUseAlpha;
+		bool					m_isUseAlpha;
 
 	protected:
 		//constructor and destructor
@@ -61,48 +61,48 @@ namespace BEngine
 		//////////////////////////////////////////////////////////////////////////
 		//set color function
 		//////////////////////////////////////////////////////////////////////////
-		void		SetColor(__FLOAT red, __FLOAT green, __FLOAT blue, __FLOAT alpha);
-		void		SetColor(SColor4f color);
-		void		SetColor(SColor4i color);
+		void		SetColor(float red, float green, float blue, float alpha);
+		void		SetColor(math::vec4f color);
+		void		SetColor(math::vec4i color);
 
 		//////////////////////////////////////////////////////////////////////////
 		//Set Blending
 		//////////////////////////////////////////////////////////////////////////
-		void		EnableBlending(__BOOL enable);
-		__BOOL		IsUseBlending();
+		void		EnableBlending(bool enable);
+		bool		IsUseBlending();
 
 		//////////////////////////////////////////////////////////////////////////
 		//Attribute pointer
 		//////////////////////////////////////////////////////////////////////////
-		void		AttributePointer(enum EGL30DriverAttribType attribType, __INT32 size, enum EGL30DriverPrimaryType primType, __UINT32 stride, void* pointer);
+		void		AttributePointer(enum EGL30DriverAttribType attribType, s32 size, enum EGL30DriverPrimaryType primType, u32 stride, void* pointer);
 		
 
 		//////////////////////////////////////////////////////////////////////////
 		//Enable client state (enable / disable attrib pointer)
 		//////////////////////////////////////////////////////////////////////////
-		void		EnableAttribPointer(enum EGL30DriverAttribType attribType, __BOOL isUse);
+		void		EnableAttribPointer(enum EGL30DriverAttribType attribType, bool isUse);
 
 		//////////////////////////////////////////////////////////////////////////
 		//Draw Array
 		//////////////////////////////////////////////////////////////////////////
-		void		DrawElements(enum EGL30DriverRenderMode, __UINT32 numOfIndices, enum EGL30DriverPrimaryType primType, void *indices);
-		void		DrawElements(enum EGL30DriverRenderMode, __UINT32 numOfIndices);
-		void		DrawArrays(enum EGL30DriverMatrixMode, __UINT32 first, __UINT32 size);
+		void		DrawElements(enum EGL30DriverRenderMode, u32 numOfIndices, enum EGL30DriverPrimaryType primType, void *indices);
+		void		DrawElements(enum EGL30DriverRenderMode, u32 numOfIndices);
+		void		DrawArrays(enum EGL30DriverMatrixMode, u32 first, u32 size);
 
 		//////////////////////////////////////////////////////////////////////////
 		//Clear screen
 		//////////////////////////////////////////////////////////////////////////
-		void		Clear(SColor4f color);
+		void		Clear(math::vec4f color);
 
 		//////////////////////////////////////////////////////////////////////////
 		//Set viewport
 		//////////////////////////////////////////////////////////////////////////
-		void		SetViewport(SRect rect);
+		void		SetViewport(math::rectf rect);
 
 		//////////////////////////////////////////////////////////////////////////
 		// Orthor
 		//////////////////////////////////////////////////////////////////////////
-		void		Orthor(__FLOAT left, __FLOAT right, __FLOAT top, __FLOAT bottom, __FLOAT znear, __FLOAT zfar);
+		void		Orthor(float left, float right, float top, float bottom, float znear, float zfar);
 
 		//////////////////////////////////////////////////////////////////////////
 		// Matrix mode
